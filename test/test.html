@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Select</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <style>
+        html {
+            min-width: 100%;
+            min-height: 100vh;
+            height: 100vh;
+        }
+
+        body {
+            min-width: 150px;
+            position: relative;
+            font-family: sans-serif;
+        }
+    </style>
+
+    <!-- <script src="/src/js/jquery-3.4.1.js"></script> -->
+    <script src="/src/js/jquery-3.4.1.js" defer></script>
+    <script src="/src/js/angular.js" defer></script>
+
+    <link rel="stylesheet" href="/dist/dropdown-select.css" defer>
+    <script src="/dist/dropdown-select.js" defer></script>
+    <script src="/src/app.js" defer></script>
+
+</head>
+<body>
+
+    <div ng-app='DropdownSelectApp' ng-controller='ctrlTest'>
+        <div style="width: 350px;display: inline-block;margin: 0px auto;margin-top: 150px;">
+            <dropdown-select dd-model='selectedBrands' dd-data='brandList' dd-label='Name' dd-change="OnBrandSelected()">
+            </dropdown-select>
+        </div>
+        <div style="width: 350px;display: inline-block;margin: 0px auto;margin-top: 150px;">
+            <dropdown-select dd-model='selectedProducts' dd-data='testArrayString' >
+            </dropdown-select>
+        </div>
+        <div style="width: 350px;display: inline-block;margin: 0px auto;margin-top: 150px;">
+            <div class="ng-dropdown-container show">
+                <div class="ng-dropdown-text">
+                    <span>{{productList['Name'] ? productList['Name'] : "-- Select -- "}}</span>
+                </div>
+                <ul class="ng-dropdown-options">
+                    <li class="ng-dropdown-item">
+                        <input type="text" class="ng-dropdown-search" ng-model="searchText">
+                    </li>
+                    <li class="ng-dropdown-item" ng-click="Clear()">
+                        <input type="checkbox" name="" id="">
+                        Select All
+                    </li>
+                    <li class="ng-dropdown-item" ng-class="{'selected':item === productList}" 
+                    ng-repeat="item in productList | filter:ddSearchFilter" data-item="{{item}}" ng-click="SelectItem($event,item)">
+                    <input type="checkbox">
+                        {{item['Name']}}
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div style="margin-top: 100px;">
+            <p>
+                Brand : {{selectedBrands}}
+            </p>
+            <p>
+                Product : {{selectedProducts}}
+            </p>
+        </div>
+    </div>
+</body>
+</body>
+
+</html>
